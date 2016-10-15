@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>register</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/animation.css" />
+    <link rel="stylesheet" href="css/choose.css" />
+</head>
+<body>
+	<div id="outer">
+		<header>为自己添加标签,寻找属于自己的标志</header>
+		<section>
+			<ul id="tags">
+				
+			</ul>
+			<div id="change_tags">并没有多少我喜欢的,赶紧换！</div>
+			<ul id="show_tag">
+			</ul>
+		</section>
+		<footer>
+			<!--**************************************-->
+			<form name="frm">
+				<a href="javascript:;" id="sub">看来你已经选好了</a>
+				<input type="text" name="user" id="user"/>
+				<input type="password" name="pwd" id="pwd"/>
+				<input type="password" name="tel" id="tel"/>
+				<input type="text" id="get" name="get"/>
+				<input type="text" id="planet" value="planet" name="planet"/>
+				
+			</form>
+		</footer>
+	</div>
+	
+
+	<script type="text/javascript" src="js/zepto.js" ></script>
+	<!--<script type="text/javascript" src="js/iscroll.js" ></script>-->
+	<script type="text/javascript" src="js/touch.min.js" ></script>
+	<script type="text/javascript" src="js/choose.js" ></script>
+	<script>
+		function bodyScale(){
+					var devicewidth=document.documentElement.clientWidth;
+					var scale=devicewidth/1080;
+					document.body.style.zoom=scale;
+			}
+		window.onload=window.onresize=function(){
+					bodyScale();
+						$('#sub').on("touchend", function() {
+					var obj = {
+						user: $("#user").val(),
+						pwd: $("#pwd").val(),
+						tel:$("#tel").val(),
+						get:$("#get").val(),
+						planet:$("#planet").val()
+					}
+					$.ajax({
+						url: 'http://yuanhang.bj.bdysite.com/php/zhuce.php',
+						type: 'post',
+						jsonp: 'callback',
+						dataType: 'text',
+						data: obj,
+						success: function(msg) {
+							console.log(msg);
+							if(msg==1){
+								window.location.href="friends.html";
+								localStorage.setItem("chat_name",$("#user").val());
+							}else{
+								alert("注册失败");
+							}
+						},
+						error: function(err) {
+//							alert('fail');
+						}
+					});
+				});
+			}
+		$(function(){
+				getVal();				
+			function getVal(){
+						var user=localStorage.getItem("user");
+						var phone=localStorage.getItem("phone");
+						var pass=localStorage.getItem("pwd");
+						$("#user").val(user);
+						$("#pwd").val(pass);
+						$("#tel").val(phone);
+						//alert($("#user").val());
+					}
+		})
+		
+	</script>
+</body>
+</html>

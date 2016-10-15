@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=0.5,maximum-scale=1.0,initial-scale=1.0,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="newIconfont/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/friends.css" />
+		<link rel="stylesheet" type="text/css" href="css/first.css" />
+		
+	</head>
+
+	<body>
+		<header>
+			<p class="h_return">返回
+				<p>
+		</header>
+
+		<section>
+			<div class="hot_square">
+			</div>
+		</section>
+		<footer>
+			<div class="active">
+				<a href="javascript:void(0);"><i class="iconfont">&#xe616;</i><br/><span>看一看</span></a>
+			</div>
+			<div>
+				<a href="chat.html"><i class="iconfont">&#xe608;</i><br/><span>聊天</span></a>
+			</div>
+			<div></div>
+			<div>
+				<a href="friends.html"><i class="iconfont">&#xe609;</i><br/><span>朋友圈</span></a>
+			</div>
+			<div>
+				<a href="info.html"><i class="iconfont">&#xe604;</i><br/><span>自己</span></a>
+			</div>
+		</footer>
+		<div id="add"><i class="iconfont">&#xe602;</i></div>
+		<div id="blackShadow">
+			<form id="sendDtL" name="sendDtL">
+				<div id="sendDt">
+					<textarea name="" rows="" cols="" placeholder="说点什么吧..." maxlength="150" class="txa"></textarea>
+					<div id="preview" style="opacity: 0;">
+						<img id="imghead" width=100 height=100 border=0 src='<%=request.getContextPath()%>/images/defaul.jpg'>
+					</div>
+				</div>
+
+				<div id="sendBtn">
+					<a href="javascript:;">CANCEL</a>
+					<a href="javascript:void(0);" id="sub">SEND</a>
+				</div>
+				<div id="up_photo">
+					<i class="iconfont">&#xe614;</i>
+					<input class="upIn" name="photo" type="file" accept="image/*" capture="microphone" onchange="previewImage(this)">
+				</div>
+			</form>
+		</div>
+
+		<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+		<script src="js/index.js"></script>
+		<script type="text/javascript" src="js/zepto.js"></script>
+		<script type="text/javascript" src="js/touch.min.js"></script>
+
+		<script type="text/javascript">
+			$("#add").on("touchend", function() {
+				$("#blackShadow").css({
+					display: "block"
+				});
+
+				$(this).css({
+					animation: "addMove1 0.5s linear"
+				})
+				$("#sendBtn a:nth-child(1)").on("touchend", function() {
+					$("#blackShadow").css("display", "none");
+					$("#add").css({
+						animation: "addMove2 0.5s linear"
+					})
+				});
+				$("#sendBtn a:nth-child(2)").on("touchend", function() {
+					$("#blackShadow").css("opacity", 0);
+					$("#add").css({
+						animation: "addMove2 0.5s linear"
+					})
+					setTimeout(function() {
+						window.location.reload();
+					}, 1000);
+				});
+			})
+
+			/*读取当前用户*/
+			var cur_user = localStorage.getItem("chat_name");
+			//console.log(cur_user);
+			/*将动态传入数据库存储*/
+			$('#sub').on("touchend", function() {
+				if($(".txa").val() == "") {
+					return;
+				}
+				var obj = {
+					user: cur_user,
+					content: $(".txa").val()
+				}
+				$(".txa").val("");
+				$.ajax({
+					url: 'http://yuanhang.bj.bdysite.com/php/friends.php',
+					type: 'post',
+					jsonp: 'callback',
+					dataType: 'text',
+					data: obj,
+					success: function(msg) {
+						if(msg == 1) {
+							$(".txa").val("");
+							return;
+						} else {
+							alert("发送失败");
+						}
+					},
+					error: function(err) {
+						//alert('fail');
+					}
+				});
+
+			});
+		</script>
+
+	</body>
+
+</html>

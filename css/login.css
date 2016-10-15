@@ -1,0 +1,147 @@
+html,body{
+	height:100%;
+}
+a{ 
+	-webkit-tap-highlight-color:rgba(255,0,0,0);
+	border:0;
+} 
+.container{
+	height:100%;
+	width:1080px;
+	margin:0 auto;
+	/*background: -webkit-linear-gradient(top,#fddbcc 5%,#fee6dc 70%);*/
+	/*background: #fee6dc;*/
+	background: url(../img/login.png) no-repeat;
+	/*background-size: 100% 100%;*/
+	
+}
+input{
+	/*float: left;*/
+	border:none;
+}
+header{
+	height:60px;
+	background: #05befb;
+}
+.main{
+	padding-top:200px;
+}
+.main_tit{
+	color:#fff;
+	text-shadow:1px 1px 20px #fff;
+	font-size: 150px;
+	text-align: center;
+	margin-bottom: 250px;
+	font-family:"微软雅黑";
+	/*letter-spacing: 5px;*/
+	position: relative;
+}
+.heart{
+	display: block;
+	width:22px;
+	height:22px;
+	position: absolute;
+	right:425px;
+	top:6px;
+	z-index:1;
+}
+form{
+	text-align: center;
+}
+.user{
+	width:869px;
+	height:100px;
+	/*margin-left:117px;*/
+	padding:3px 10px 3px 20px;
+	border-radius:20px;
+	background:none;
+	color:#fff;
+	/*text-shadow: 0px 0px 5px #fff;*/
+	margin-bottom:40px;
+	font-size:40px;
+	outline: none;
+	border-bottom: 1px solid #ccc;
+	
+}
+.pwd{
+	width:869px;
+	height:100px;
+	/*margin-left:117px;*/
+	padding:3px 10px 3px 20px;
+	border-radius:20px;
+	background: none;
+	color:#fff;
+	/*text-shadow: 0px 0px 5px #fff;*/
+	font-size:40px;
+	outline: none;
+	border-bottom: 1px solid #ccc;
+}
+form{
+	position: relative;
+}
+form .user_icon{
+	position:absolute;
+	right:135px;
+	top:35px;
+	font-size:50px;
+	color:#B6A9B0;
+}
+form .pwd_icon{
+	position:absolute;
+	right:135px;
+	top:245px;
+	font-size:50px;
+	color:#B6A9B0;
+}
+.sub{
+	display:block;
+	float: left;
+	width:879px;
+	height:100px;
+	text-align: center;
+	margin:146px 0 0 100px;
+	/*background: -webkit-linear-gradient(left,#ff8a67 0%,#feb068 60%);*/
+	background: rgba(255,255,255,0.6);
+	border-radius:10px;
+	/*color:#fff;*/
+	color:#333;
+	line-height: 116px;
+	font-size: 45px;
+	letter-spacing: 10px;
+	box-shadow: 0px 0px 15px #fff;
+}
+.no_id{
+	margin-top:100px;
+	text-align:right;
+	padding-right:100px;
+}
+.no_id span{
+	font-size: 40px;
+	color:#ccc;
+}
+.no_id a{
+	margin-left:20px;
+	color:#B18F80;
+	font-size: 30px;
+}
+.msg1{
+	text-align: left;
+	/*background: red;*/
+	width:879px;
+	margin:0 auto;
+	line-height: 60px;
+	font-size: 40px;
+	height:60px;
+	color:#B18F80;
+}
+.msg2{
+	text-align: left;
+	/*background: red;*/
+	width:879px;
+	margin:0 auto;
+	line-height: 60px;
+	font-size: 40px;
+	margin-top:40px;
+	height:60px;
+	color:#B18F80;
+}

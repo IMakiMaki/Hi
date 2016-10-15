@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>朋友圈</title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/friends.css" />
+		<link rel="stylesheet" type="text/css" href="newIconfont/iconfont.css" />
+	</head>
+
+	<body>
+		<header>
+			<p>朋友圈</p>
+			<i class="iconfont refresh">&#xe605;</i>
+		</header>
+		<section>
+			<ul id="friendsContent">
+				
+			</ul>
+		</section>
+		<footer>
+			<div>
+				<a href="first.html"><i class="iconfont">&#xe616;</i><br/><span>看一看</span></a>
+			</div>
+			<div>
+				<a href="chat.html"><i class="iconfont">&#xe608;</i><br/><span>聊天</span></a>
+			</div>
+			<div></div>
+			<div class="active">
+				<a href="javascript:void(0);"><i class="iconfont">&#xe609;</i><br/><span>朋友圈</span></a>
+			</div>
+			<div>
+				<a href="info.html"><i class="iconfont">&#xe604;</i><br/><span>自己</span></a>
+			</div>
+		</footer>
+		<div id="add"><i class="iconfont">&#xe602;</i></div>
+		<div id="blackShadow">
+			<form id="sendDtL" name="sendDtL">
+				<div id="sendDt">
+					<textarea name="" rows="" cols="" placeholder="说点什么吧..." maxlength="150" class="txa"></textarea>
+					<div id="preview" style="opacity: 0;">
+    				<img id="imghead" width=100 height=100 border=0 src='<%=request.getContextPath()%>/images/defaul.jpg'>
+				</div>
+				</div>
+				
+				<div id="sendBtn">
+					<a href="javascript:;">取消</a>
+					<a href="javascript:void(0);" id="sub">发送</a>
+				</div>
+				<div id="up_photo">
+					<i class="iconfont">&#xe614;</i>
+					<input class="upIn" name="photo" type="file" accept="image/*" capture="microphone" onchange="previewImage(this)">
+				</div>
+			</form>
+		</div>
+		
+		<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+		<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/touch.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function bodyScale() {
+				var devicewidth = document.documentElement.clientWidth;
+				var scale = devicewidth / 1080;
+				document.body.style.zoom = scale;
+			}
+			window.onload = window.onresize = function() {
+				bodyScale();
+				//读取数据库中的动态
+				$.ajax({
+					type: "get",
+					async: false,
+					url: "http://yuanhang.bj.bdysite.com/php/get_friend.php",
+					dataType: "text",
+					jsonp: "callback",
+					success: function(json) {
+						var data = JSON.parse(json);
+						var parent = document.getElementById("friendsContent");
+						for(var i = 0; i < data.length; i++) {
+							var item = JSON.parse(data[i]);
+							//console.log(item);
+							parent.innerHTML += '<li class="itemDt"><dl><dd class="userName"><span>' + item["user_name"] + '</span><i class="iconfont" style="font-size:45px;position:relative;top:-20px;left:10px;color:rgba(131,175,155,1)">&#xe60f;</i></dd><dd class="content">' + item["content"] + '</dd><dd class="sendTime"><i class="iconfont">&#xe600;</i>' + item["date"].slice(5) + '</dd><dt><img src="img/f_bg.png"/></dt></dl></li>';
+						}
+					},
+					error: function() {
+						alert('fail');
+					}
+				});
+				$("#add").on("touchend", function() {
+					$("#blackShadow").css({
+						display: "block"
+					});
+
+					$(this).css({
+						animation: "addMove1 0.5s linear"
+					})
+					$("#sendBtn a:nth-child(1)").on("touchend", function() {
+						$("#blackShadow").css("display", "none");
+						$("#add").css({
+							animation: "addMove2 0.5s linear"
+						})
+					});
+					$("#sendBtn a:nth-child(2)").on("touchend", function() {
+						$("#blackShadow").css("opacity", 0);
+						$("#add").css({
+							animation: "addMove2 0.5s linear"
+						})
+						setTimeout(function() {
+							window.location.reload();
+						}, 1000);
+					});
+				})
+				$(".refresh").on("touchend", function() {
+					$(this).css({
+						animation: "rotateRe 0.5s linear"
+					});
+					setTimeout(function() {
+						window.location.reload();
+					}, 1000);
+				});
+				/*读取当前用户*/
+				var cur_user = localStorage.getItem("chat_name");
+				console.log(cur_user);
+				/*将动态传入数据库存储*/
+				$('#sub').on("touchend", function() {
+					if($(".txa").val() == "") {
+						return;
+					}
+					var obj = {
+						user: cur_user,
+						content: $(".txa").val()
+					}
+					$(".txa").val("");
+					$.ajax({
+						url: 'http://yuanhang.bj.bdysite.com/php/friends.php',
+						type: 'post',
+						jsonp: 'callback',
+						dataType: 'text',
+						data: obj,
+						success: function(msg) {
+							if(msg == 1) {
+								$(".txa").val("");
+								return;
+							} else {
+								alert("发送失败");
+							}
+						},
+						error: function(err) {
+							//alert('fail');
+						}
+					});
+
+				});
+				//点击用户名事件
+				$(".userName").on("touchend", function() {
+					localStorage.setItem("with_name", $(this).find("span").text());
+					localStorage.setItem("now_msg", "");
+					window.location.href = "chat.html";
+				})
+			}
+
+			function previewImage(file) {
+				var MAXWIDTH = 260;
+				var MAXHEIGHT = 180;
+				var div = document.getElementById('preview');
+				if(file.files && file.files[0]) {
+					div.innerHTML = '<img id=imghead>';
+					var img = document.getElementById('imghead');
+					img.onload = function() {
+						var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+						img.width = rect.width;
+						img.height = rect.height;
+						//                 img.style.marginLeft = rect.left+'px';
+						img.style.marginTop = rect.top + 'px';
+					}
+					var reader = new FileReader();
+					reader.onload = function(evt) {
+						img.src = evt.target.result;
+					}
+					reader.readAsDataURL(file.files[0]);
+				} else //兼容IE
+				{
+					var sFilter = 'filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+					file.select();
+					var src = document.selection.createRange().text;
+					div.innerHTML = '<img id=imghead>';
+					var img = document.getElementById('imghead');
+					img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+					var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+					status = ('rect:' + rect.top + ',' + rect.left + ',' + rect.width + ',' + rect.height);
+					div.innerHTML = "<div id=divhead style='width:" + rect.width + "px;height:" + rect.height + "px;margin-top:" + rect.top + "px;" + sFilter + src + "\"'></div>";
+				}
+				$("#preview").css("opacity","1");
+			}
+
+			function clacImgZoomParam(maxWidth, maxHeight, width, height) {
+				var param = {
+					top: 0,
+					left: 0,
+					width: width,
+					height: height
+				};
+				if(width > maxWidth || height > maxHeight) {
+					rateWidth = width / maxWidth;
+					rateHeight = height / maxHeight;
+
+					if(rateWidth > rateHeight) {
+						param.width = maxWidth;
+						param.height = Math.round(height / rateWidth);
+					} else {
+						param.width = Math.round(width / rateHeight);
+						param.height = maxHeight;
+					}
+				}
+
+				param.left = Math.round((maxWidth - param.width) / 2);
+				param.top = Math.round((maxHeight - param.height) / 2);
+				return param;
+			}
+		</script>
+	</body>
+
+</html>

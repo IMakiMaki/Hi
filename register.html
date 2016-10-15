@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>register</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/register.css" />
+</head>
+<body>
+	<div id="outer">
+		<header></header>
+		<section id="main">
+			<h1 id="title">Hi</h1>
+			<form name="frm">
+				<label><input id="user" name="user" type="text" placeholder="昵称(给自己一个有逼格的名字吧)"/></label>
+				<div class="error error_user">
+					
+				</div>
+				<label><input id="phone" name="phone" type="tel" placeholder="手机号"></label>
+				<div class="error error_phone">
+					
+				</div>
+				<label><input id="pass" name='pwd' type="password" placeholder="密码(六位以上，牢牢记好喔！)"></label>	
+				<div class="error error_pass">
+					
+				</div>
+				<a id="sub" href="choose.html">下一步</a>
+				<a href="html/login.html" id="turn_login">已有Hi账号？那还不赶快去约起来?</a>
+			</form>
+		</section>
+		<!--<footer><a href="javascript:void(0)">还不想注册？先看看附近的Aliean吧</a></footer>-->
+	</div>
+	<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+	<script type="text/javascript" src="js/zepto.js"></script>
+	<script type="text/javascript" src="js/touch.min.js" ></script>
+	<script>
+		function bodyScale(){
+					var devicewidth=document.documentElement.clientWidth;
+					var scale=devicewidth/1080;
+					document.body.style.zoom=scale;
+			}
+		window.onload=window.onresize=function(){
+					bodyScale();	
+			}
+		$(function(){
+			$("#sub").click(function(){
+				save();
+				if(!f_pass || !f_phone || !f_user){
+					alert("请填写正确的信息");
+					return false;
+				}
+			})
+		
+			function save(){
+						var user=$("#user").val();
+						var phone=$("#phone").val();
+						var pass=$("#pass").val();
+						localStorage.setItem("user",user);
+						localStorage.setItem("phone",phone);
+						localStorage.setItem("pwd",pass);
+					}
+			var f_user=0;
+			var f_phone=0;
+			var f_pass=0;
+		    $("#user").blur(function(){
+		    	var val=$(this).val();
+		    	if(val.length<2||val.length>16){
+		    		$(".error_user").html("2-16位字符");
+		    	}else{
+		    		$(".error_user").html("");
+		    		f_user=1;
+		    	}
+		    	
+		    });
+		     $("#phone").blur(function(){
+		    	var val=$(this).val();
+		    	var reg=/0?(13|14|15|18)[0-9]{9}/;
+		    	var re=reg.test(val);
+		    	if(re!=1){
+		    		$(".error_phone").html("请输入正确的手机号");
+		    	}else{
+		    		$(".error_phone").html('');
+		    		f_phone=1;
+		    	}
+		    	
+		    });
+		        $("#pass").blur(function(){
+		    	var val=$(this).val();
+		    	if(val.length<6||val.length>16){
+		    		$(".error_pass").html("6-16位字符");
+		    	}else{
+		    		$(".error_pass").html("");
+		    		f_pass=1;
+		    	}
+		    	
+		    });
+		})
+		
+	</script>
+</body>
+</html>

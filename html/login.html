@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>登录页面</title>
+		<meta name="viewport" content="width=device-width,minimum-scale=0.5,maximum-scale=1.0,initial-scale=1.0,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../css/login.css" />
+		<link rel="stylesheet" type="text/css" href="../newIconfont/iconfont.css" />
+		<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
+		<script type="text/javascript" src="../js/zepto.js"></script>
+		<script type="text/javascript" src="../js/touch.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<!--头部-->
+			<!--<header></header>-->
+			<!--主体-->
+			<div class="main">
+				<h3 class="main_tit">Hi <img src="../img/heart.png" class="heart"/></h3>
+				<form class="clear" id="frm" name="frm">
+					<label for="">
+						<input type="tel" name="tel" class="user" placeholder="手机号" autofocus/>
+					<i class="iconfont user_icon">&#xe60a;</i>
+					<div class="msg1"></div>
+					</label>
+					<label for="">
+						<input type="password" name="pwd" class="pwd" placeholder="密码" />
+					<i class="iconfont pwd_icon">&#xe603;</i>
+					<div class="msg2"></div>
+					</label>
+					<input class="sub" type="button" value="登录" />
+				</form>
+				<p class="no_id"><span>还没有账号?</span>
+					<a href="../register.html">注册</a>
+				</p>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/login.js"></script>
+		<script type="text/javascript">
+			function bodyScale() {
+				var devicewidth = document.documentElement.clientWidth;
+				var scale = devicewidth / 1080;
+				document.body.style.zoom = scale;
+			}
+			window.onload = window.onresize = function() {
+				(function(){
+					var log_user = localStorage.getItem("chat_name");
+					if(log_user !== "noUserNow!!!" && log_user !== null){
+						window.location = "../friends.html";
+					}else{
+						return;
+					}
+				})();
+				bodyScale();
+				$('.sub').on("touchend", function() {
+					var obj = {
+						tel: $(".user").val(),
+						pwd: $(".pwd").val()
+					}
+					$.ajax({
+						url: 'http://yuanhang.bj.bdysite.com/php/get_user.php',
+						type: 'get',
+						jsonp: 'callback',
+						dataType: 'text',
+//						data: obj,
+						success: function(msg) {
+						var flag=0;
+						var data=JSON.parse(msg);
+						for(var i=0;i<data.length;i++){
+							var item=JSON.parse(data[i]);
+							//console.log(item);
+							if(item.phone==$(".user").val() &&item.pwd==$(".pwd").val()){
+								flag=1;
+								localStorage.setItem("chat_name",item.user);
+								var random=Math.floor(Math.random()*4);
+								localStorage.setItem("theme",random);
+								
+							}
+						}
+						if(flag){
+								window.location.href="../friends.html";
+							}else{
+								alert("用户名或密码错误");
+								return;
+							}
+						},
+						error: function(err) {
+//							alert('fail');
+						}
+					});
+				});
+				//get_theme();
+				function get_theme(){
+					var theme=localStorage.getItem("theme");
+					var Link=$("<link>").attr({
+						"href":"../css/r1.css",
+						"type":"text/css",
+						"rel":"stylesheet"
+					});
+					$("head").append(Link);
+				}
+			}
+		</script>
+
+	</body>
+</html>

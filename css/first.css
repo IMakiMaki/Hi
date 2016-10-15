@@ -1,0 +1,319 @@
+footer {
+	position: relative;
+	padding-top: 10px;
+	width: 100%;
+	height: 138px;
+	background: #FFFFFF;
+	display: -webkit-box;
+	-webkit-box-orient: horizontal;
+}
+
+footer div {
+	-webkit-box-flex: 1;
+	text-align: center;
+}
+
+footer div span {
+	font-size: 30px;
+}
+
+footer a {
+	/*color: #e0cac4;*/
+	color: #000;
+}
+
+footer div .iconfont {
+	font-size: 80px;
+}
+
+footer .active a {
+	/*color: #fd9764;*/
+	color: orangered;
+}
+
+
+/*发送框*/
+
+#blackShadow {
+	display: none;
+	background: rgba(0, 0, 0, 0.7);
+	top: 0;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+#sendDt {
+	position: absolute;
+	width: 1010px;
+	height: 705px;
+	background: #fff;
+	border-radius: 20px;
+	top: 350px;
+	left: 35px;
+	text-align: center;
+	transform-origin: center 2000px;
+	animation: sendMove 1s linear;
+}
+
+#add{
+	text-align: center;
+	width: 160px;
+	height: 160px;
+	background: #FFFFFF;
+	position: absolute;
+	bottom: 40px;
+	left: 462px;
+	border-radius: 50%;
+	line-height: 145px; 
+	transform-origin: 80px 80px; 
+} 
+/*发送动画*/
+@keyframes addMove1{
+	from{transform: scale(1.2) rotate(0);}
+	to{transform: scale(1) rotate(180deg);}
+}
+@keyframes addMove2{
+	from{transform: scale(1.2) rotate(0deg);}
+	to{transform: scale(1) rotate(180deg);}
+}
+@keyframes addMove3{
+	from{transform: scale(1) translateY(0);}
+	to{transform: scale(0) translateY(-200px);}
+}
+
+#add .iconfont{
+	/*color: #f99f75;*/
+	color: #000;
+	font-size: 140px;
+}
+/*发送框动画*/
+
+@keyframes sendMove {
+	0% {
+		transform: rotate(0deg);
+	}
+	50% {
+		transform: rotate(180deg);
+	}
+	75% {
+		transform: rotate(380deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+#sendDt textarea {
+	border: 0;
+	/*background: #fff3ed;*/
+	background: #fff;
+	border-radius: 10px;
+	outline: 0;
+	font-size: 50px;
+	width: 862px;
+	height: 458px;
+	margin: 60px auto 0;
+	resize: none;
+}
+
+#sendBtn a {
+	border-radius: 10px;
+	color: #FFF3ED;
+	line-height: 107px;
+	font-size: 40px;
+	text-align: center;
+	display: inline-block;
+	width: 250px;
+	height: 107px;
+	position: absolute;
+	animation: btnMove 1s linear;
+}
+
+@keyframes btnMove {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+#sendBtn a:nth-child(1) {
+	top: 947px;
+	left: 35px;
+	background: #fba8ad;
+}
+
+#sendBtn a:nth-child(2) {
+	top: 947px;
+	right: 35px;
+	background: #99f29d;
+}
+
+body,
+html {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	-webkit-box-orient: vertical;
+	display: -webkit-box;
+}
+
+header {
+	height: 135px;
+	width: 100%;
+	background: #fd9d6a;
+}
+
+header p {
+	font-size: 60px;
+	line-height: 135px;
+	color: #FFFFFF;
+}
+
+section {
+	width: 100%;
+	height: 100%;
+	-webkit-box-flex: 1;
+	-webkit-box-orient: vertical;
+	display: -webkit-box;
+	/*background: #E7E1CD;*/
+	/*background: #FFFFFF;*/
+	background: url(../img/login.png);
+	overflow: auto;
+}
+
+section .hot_square_name {
+	font-size: 60px;
+	text-align: center;
+}
+
+section iframe {
+	width: 850px;
+	height: 75%;
+	position: absolute;
+	top: 10%;
+	left: 10%;
+	right: 50%;
+	display: none;
+}
+
+section ul a {
+	color: #b49284;
+}
+
+section ul {
+	-webkit-box-flex: 1;
+	-webkit-box-orient: horizontal;
+	display: -webkit-box;
+}
+
+section ul .first {
+	-webkit-box-flex: 1;
+	padding: 4%;
+}
+
+section .box{
+	box-shadow: 0 0 5px #888888;
+}
+
+section ul .first .box {
+	padding: 10px;
+	display: block;
+	width: 100%;
+	background:rgba(255,255,255,0.1);
+	border-radius: 20px;
+}
+
+section ul .first .image img {
+	width: 100%;
+	height: 300px;
+}
+
+section ul .first h2 {
+	margin-top: 10px;
+	font-size: 40px;
+	margin-left: 40px;
+	text-overflow: ellipsis;
+	width: 350px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+section ul .first .icfont {
+	margin-top: 30px;
+	padding: 3%;
+}
+
+section ul .first .icfont span {
+	display: inline-block;
+	margin-left: 5%;
+	color: #ea8010;
+}
+
+section ul .first .icfont em {
+	display: inline-block;
+	float: right;
+	margin-right: 5%;
+	color: #f4c600;
+}
+
+section ul .second {
+	-webkit-box-flex: 1;
+	padding: 4%;
+	
+}
+
+section ul .second .box {
+	padding: 10px;
+	display: block;
+	width: 100%;
+	background:rgba(255,255,255,0.1);
+	border-radius: 20px;
+}
+
+section ul .second .image img {
+	border-radius: 20px;
+	width: 100%;
+	height: 300px;
+}
+
+section ul .second h2 {
+	margin-top: 10px;
+	font-size: 40px;
+	margin-left: 40px;
+	text-overflow: ellipsis;
+	width: 350px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+section ul .second .icfont {
+	margin-top: 30px;
+	padding: 3%;
+}
+
+section ul .second .icfont span {
+	display: inline-block;
+	margin-left: 5%;
+	color: #ea8010;
+}
+
+section ul .second .icfont em {
+	display: inline-block;
+	float: right;
+	margin-right: 5%;
+	color: #f4c600;
+}
+
+footer {
+	height: 148px;
+	width: 100%;
+	background: #FFFFFF;
+}
+
+
+/*# sourceMappingURL=index.css.map */

@@ -1,0 +1,103 @@
+/*此页面为注册登录页面样式*/
+html,body{
+	height: 100%;
+	width: 100%;
+	font-family: "comic sans ms","微软雅黑";
+}
+	
+	#outer{
+		width: 1080px;
+		height: 100%;
+		overflow: hidden;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		
+	}
+		
+		/*头部留空*/
+		/*header{
+			width: 1080px;
+			height: 135px;
+			background: #fd9d6a;
+		}*/
+			/*头部结束*/
+			
+		/*中间部分开始*/
+		section{
+			width: 1080px;
+			-webkit-box-flex: 1;
+			/*background: #fee6dc;*/
+			background: url(../img/login.png) no-repeat;
+			/*background-size: 100% 100%;*/
+		}
+		input{
+			border: none;
+			outline: none;
+		}
+		#user,#pass,#phone{
+			width: 840px;
+			height: 100px;
+			border-bottom: 1px solid #ccc;
+			background: none;
+			font-size: 40px;
+			color: #888;
+			border-radius:20px;
+		}
+		form{
+			text-align: center;
+		}
+		#sub{
+			background:rgba(255,255,255,0.6);
+			width: 840px;
+			height: 100px;	
+			display: inline-block;
+			line-height: 100px;
+			border-radius: 10px;
+			margin-top: 30px;
+			font-size: 45px;
+			color: #333;
+			box-shadow: 0px 0px 15px #fff;
+		}
+		label{
+			width: 1080px;
+			height: 150px;
+			display: block;
+			
+		}
+		h1{
+			width: 1080px;
+			padding: 200px 0;
+			font-size: 150px;
+			text-align: center;
+			color:#fff;
+			text-shadow:0px 0px 20px #fff;
+			/*font-family: "微软雅黑";*/
+		}
+		#turn_login{
+			width: 1080px;
+			padding: 150px 75px;
+			font-size: 40px;
+			color: #ccc;
+			display: block;
+		}
+		/*中间部分结束*/
+		/*底部开始*/
+		footer{
+			width: 1080px;
+			padding: 40px 0px;
+			text-align: center;
+			color: #ccc;
+			background: #fee6dc;;
+			font-size: 40px;
+		}
+		.error{
+			text-align: left;
+			padding-left:130px;
+			font-size:40px;
+			color: #B18F80;
+			line-height: 50px;
+			height:50px;
+       }
+		
+		
+		

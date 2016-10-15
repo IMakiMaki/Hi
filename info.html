@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>register</title>
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="newIconfont/iconfont.css" />
+		<link rel="stylesheet" href="css/person.css" />
+		<script type="text/javascript">
+		</script>
+	</head>
+<!--hi-->
+	<body>
+		<div id="outer">
+			<header>
+				<p style="text-align: left;"><a href="javascript:window.history.go(-1);"><i class="iconfont">&#xe610;</i>返回</a></p>
+				<p class="zhuxiao" style="text-align: right;color:rgb(153, 153, 153);">注销</p>
+			</header>
+			<section>
+				<div id="person_pho">
+					<dl>
+						<dt style="background: url(img/right.png) center no-repeat;"></dt>
+						<dd style="font-size: 60px;"><i class="iconfont">&#xe611;</i><span id="user_name"></span></dd>
+						<dd><span style="font-size: 47px;">hi,我在等你写你喜欢的</span><i style="font-size: 45px;" class="iconfont">&#xe615;</i></dd>
+					</dl>
+				</div>
+				<div class="information">
+					<div class="hobby"><i class="iconfont">&#xe612;</i><em>篮球,H5,LOL</em></div>
+					<div class="friend">
+						<p><i class="iconfont">&#xe613;</i></p>
+						<ul class="clear">
+							<li><img src="img/f_4.png"/></li>
+							<li><img src="img/f_1.png"/></li>
+
+						</ul>
+					</div>
+				</div>
+			</section>
+			<div class="authorInfo">You Will Be Loved！</div>
+		</div>
+		<div class="meng_bg"></div>
+		
+		<script type="text/javascript" src="js/zepto.js"></script>
+		<script type="text/javascript" src="js/touch.min.js"></script>
+		<script>
+			function bodyScale() {
+				var devicewidth = document.documentElement.clientWidth;
+				var scale = devicewidth / 1080;
+				document.body.style.zoom = scale;
+			}
+			window.onload = window.onresize = function() {
+				bodyScale();
+				$(".zhuxiao").on("touchend",function(){
+					localStorage.setItem("chat_name","noUserNow!!!");
+					window.location = "html/login.html";
+				})
+				var cur_user = localStorage.getItem("chat_name");
+				$.ajax({
+					url: 'http://yuanhang.bj.bdysite.com/php/get_user.php',
+					type: 'get',
+					jsonp: 'callback',
+					dataType: 'text',
+					success: function(msg) {
+						var data = JSON.parse(msg);
+						for(var i = 0; i < data.length; i++) {
+							var item = JSON.parse(data[i]);
+							//console.log(item.user)
+							if(item.user == cur_user) {
+								$("#user_name").text(cur_user);
+								$(".hobby em").text(item.hoby);
+								$(".hoby").text(item.hoby);
+							}
+						}
+					},
+					error: function(err) {
+						//alert('fail');
+					}
+				});
+
+			}
+		</script>
+	</body>
+
+</html>

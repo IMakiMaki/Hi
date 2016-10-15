@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,minimum-scale=0.5,maximum-scale=1.0,initial-scale=1.0,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/chat.css" />
+		<link rel="stylesheet" type="text/css" href="newIconfont/iconfont.css" />
+	</head>
+
+	<body>
+
+		<header>
+			<span class="return">返回</span>
+			<h1 class="username">用户名</h1>
+		</header>
+
+		<section>
+			<ul id="chatContent">
+
+			</ul>
+
+			<div class="erroSend">
+				这条消息遗失在异次元了，请重新发送。
+			</div>
+		</section>
+
+		<footer>
+			<input type="text" class="text">
+			<button class="send">发送</button>
+		</footer>
+
+		<script src="js/zepto.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/touch.min.js"></script>
+		<script type="text/javascript">
+			function bodyScale() {
+				var devicewidth = document.documentElement.clientWidth;
+				var scale = devicewidth / 1080;
+				document.body.style.zoom = scale;
+			}
+			window.onload = window.onresize = function() {
+					bodyScale();
+					$(".return").on("touchend",function(){
+						window.location = "friends.html";
+				 });
+					//获取对方用户名
+					var you = localStorage.getItem("with_name");
+					$(".username").html(you);
+					var chatObj = {
+						name: you
+					}
+					//定时获取服务器数据
+					setInterval(function() {
+						$.ajax({
+							url: 'http://yuanhang.bj.bdysite.com/php/get_chat.php',
+							type: 'post',
+							jsonp: 'callback',
+							dataType: 'json',
+							data: chatObj,
+							success: function(msg) {
+								for(var i = 0; i < msg.length; i++) {
+									var item = JSON.parse(msg[i]);
+									//console.log(item["user"]);
+									if((item["user"] == you) && (item["content"] != localStorage.getItem("now_msg"))) {
+										localStorage.setItem("now_msg",item["content"]);
+										//当前的消息
+										//创建元素填充
+										var myMsg = document.createElement("li");
+										var eleStr = "<div class='circle'></div><div class='content'><div class='content_w text_content'>"+item["content"]+"</div><div class='content_down'><div class='timer'><i class='iconfont'>&#xe600;</i><em class='timer_num date_time'>"+item["date"]+"</em></div><div class='yes'><i class='iconfont icon-yes'>&#xe60e;</i></div></div></div>";
+										myMsg.innerHTML = eleStr;
+										$("#chatContent")[0].appendChild(myMsg);
+										bodyScale();
+										$("section").scrollTop($("section").height() + 9999);
+									}else{
+										//alert("cc");
+										continue;
+									}
+								}
+							},
+							error: function(err) {
+								
+							}
+						});
+					}, 2000);
+				}
+				//发送按钮
+			$('.send').on("touchend", function() {
+				if($(".text").val() == "") {  //发送不能为空
+					return;
+				}
+				//获取到当前用户名和对方用户名
+				var me = localStorage.getItem("chat_name");
+				var now = new Date();
+				//获取当前时间
+				var timeStr = (function() {
+					var str = "";
+					var hours = isTen(now.getHours());
+					var mins = isTen(now.getMinutes());
+					var secs = isTen(now.getSeconds());
+
+					function isTen(i) {
+						return i < 10 ? i = "0" + i : i = i+"";
+					}
+					str = hours + ":" + mins + ":" + secs;
+					return str;
+				})();
+				var obj = {
+					name: me,
+					content: $(".text").val(),
+					date: timeStr
+				}
+				//提交当前用户content
+				$.ajax({
+					url: 'http://yuanhang.bj.bdysite.com/php/chat.php',
+					type: 'post',
+					jsonp: 'callback',
+					dataType: 'text',
+					data: obj,
+					success: function(msg) {
+						//发送成功
+						if(msg == 1) {
+							var myCont = $(".text").val();
+							$(".text").val("");
+							//创建元素填充
+							var myMsg = document.createElement("li");
+							var eleStr = "<div class='circle_right'></div><div class='content_left'><div class='content_left_w text_content'>" + myCont + "</div><div class='content_down'><div class='timer'><i class='iconfont'>&#xe600;</i><em class='timer_num date_time'>" + timeStr + "</em></div><div class='yes'><i class='iconfont icon-yes'>&#xe60e;</i></div></div></div>";
+							myMsg.innerHTML = eleStr;
+							$("#chatContent")[0].appendChild(myMsg);
+							bodyScale();
+							$("section").scrollTop($("section").height() + 9999);
+						} else {
+							//失败提示框
+							$(".erroSend").css("display", "block");
+							setTimeout(function() {
+								$(".erroSend").css("display", "none");
+							}, 2000)
+						}
+					},
+					error: function(err) {
+						$(".erroSend").css("display", "block");
+						setTimeout(function() {
+							$(".erroSend").css("display", "none");
+						}, 2000);
+					}
+				});
+				
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,170 @@
+{
+  "friends.html": {
+    "resources": [
+      "css/friends.css",
+      "css/ux_1475464185_1565893/iconfont.css",
+      "css/ux_1475464185_1565893/iconfont.woff",
+      "js/iscroll.js",
+      "js/touch.min.js",
+      "js/zepto.js",
+      "css/reset.css",
+      "js/jquery-1.11.0.js",
+      "chat.html",
+      "img/f_bg.png",
+      "newIconfont/iconfont.woff",
+      "newIconfont/iconfont.css",
+      "%3C%\u003drequest.getContextPath()%%3E/images/defaul.jpg",
+      "info.html",
+      "img/login.png",
+      "first.html"
+    ],
+    "refer": [
+      "chat.html",
+      "info.html",
+      "first.html"
+    ]
+  },
+  "html/login.html": {
+    "resources": [
+      "js/jquery.validate.min.js",
+      "js/jquery-1.11.0.js",
+      "css/login.css",
+      "js/login.js",
+      "iconfont/iconfont.woff",
+      "img/heart.png",
+      "js/touch.min.js",
+      "js/zepto.js",
+      "css/reset.css",
+      "iconfont/iconfont.css",
+      "friends.html",
+      "register.html",
+      "newIconfont/iconfont.css",
+      "newIconfont/iconfont.woff",
+      "css/r1.css",
+      "img/bg.png",
+      "img/bg.bmp",
+      "img/login.png"
+    ],
+    "refer": [
+      "friends.html",
+      "register.html"
+    ]
+  },
+  "register.html": {
+    "resources": [
+      "js/iscroll.js",
+      "css/register.css",
+      "choose.html",
+      "js/jquery-3.1.0.min.js",
+      "img/login.png",
+      "js/touch.min.js",
+      "js/zepto.js",
+      "css/reset.css",
+      "html/login.html"
+    ],
+    "refer": [
+      "choose.html",
+      "html/login.html"
+    ]
+  },
+  "choose.html": {
+    "resources": [
+      "css/choose.css",
+      "css/animation.css",
+      "js/choose.js",
+      "json/hobby.json",
+      "friends.html",
+      "js/touch.min.js",
+      "js/zepto.js",
+      "css/reset.css",
+      "img/login.png"
+    ],
+    "refer": [
+      "friends.html"
+    ]
+  },
+  "chat.html": {
+    "resources": [
+      "css/chat.css",
+      "friends.html",
+      "html/login.html",
+      "newIconfont/iconfont.css",
+      "js/touch.min.js",
+      "js/zepto.js",
+      "css/reset.css",
+      "first.html",
+      "img/left.png",
+      "img/right.png",
+      "newIconfont/iconfont.woff",
+      "register.html"
+    ],
+    "refer": [
+      "friends.html",
+      "first.html",
+      "html/login.html",
+      "register.html"
+    ]
+  },
+  "info.html": {
+    "resources": [
+      "css/person.css",
+      "img/1.jpg",
+      "img/person/l.jpg",
+      "newIconfont/iconfont.woff",
+      "newIconfont/iconfont.css",
+      "js/touch.min.js",
+      "js/zepto.js",
+      "css/reset.css",
+      "friends.html",
+      "img/login.png",
+      "first.html",
+      "img/right.png",
+      "img/left.png",
+      "img/f_4.png",
+      "img/f_1.png",
+      "html/login.html"
+    ],
+    "refer": [
+      "friends.html",
+      "first.html",
+      "html/login.html"
+    ]
+  },
+  "first/index.html": {
+    "resources": [
+      "first/css/reset.css",
+      "first/js/touch.js",
+      "first/js/jquery-1.11.0.js",
+      "first/iconfont/iconfont.css",
+      "first/css/index.css",
+      "first/js/zepto.js",
+      "first/js/iscroll.js",
+      "first/js/new.json",
+      "first/js/index.js",
+      "first/iconfont/iconfont.woff"
+    ],
+    "refer": []
+  },
+  "first.html": {
+    "resources": [
+      "css/first.css",
+      "css/friends.css",
+      "js/jquery-1.11.0.js",
+      "newIconfont/iconfont.css",
+      "js/touch.min.js",
+      "js/zepto.js",
+      "%3C%\u003drequest.getContextPath()%%3E/images/defaul.jpg",
+      "js/index.js",
+      "css/reset.css",
+      "friends.html",
+      "newIconfont/iconfont.woff",
+      "chat.html",
+      "info.html"
+    ],
+    "refer": [
+      "friends.html",
+      "chat.html",
+      "info.html"
+    ]
+  }
+}
